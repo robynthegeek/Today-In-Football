@@ -1,13 +1,21 @@
 package com.robynandcory.goodnewseveryone;
 
+import android.graphics.Bitmap;
+
 public class NewsItem {
     private String mStoryTitle;
     private String mStoryAuthor;
     private String mStoryDate;
     private String mStoryURL;
-    private int mImageResource;
+    // Thumbnail stored as BMP from Guardian API
+    private Bitmap mImageResource;
 
-    public NewsItem(String storyTitle, String storyAuthor, String storyDate, String storyURL, int imageResource){
+    public NewsItem(String storyTitle, String storyAuthor, String storyDate, String storyURL, Bitmap imageResource){
+//        if(storyAuthor == null){
+//        mStoryAuthor = "Author Unknown";}
+//        else if (imageResource == null){
+//        mImageResource = R.drawable.oziltest;}
+
         mStoryTitle = storyTitle;
         mStoryAuthor = storyAuthor;
         mStoryDate = storyDate;
@@ -28,5 +36,5 @@ public class NewsItem {
     public String getStoryURL() {return mStoryURL; }
 
     //Returns the story image
-    public int getStoryImage() {return mImageResource; }
+    public Bitmap getStoryImage() {return mImageResource; }
 }

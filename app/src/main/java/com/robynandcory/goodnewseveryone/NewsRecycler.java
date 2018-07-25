@@ -56,6 +56,6 @@ public class NewsRecycler extends RecyclerView.Adapter<NewsRecycler.NewsHolder> 
 
         holder.authorName.setText(currentStory.getStoryAuthor());
         holder.storyName.setText(currentStory.getStoryTitle());
-        holder.storyImage.setImageResource(currentStory.getStoryImage());
+        holder.storyImage.setImageResource(R.drawable.oziltest);
     }
 }
