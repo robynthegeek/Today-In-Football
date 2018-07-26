@@ -8,6 +8,7 @@ import android.util.Log;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.AdapterView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +45,11 @@ public class NewsList extends AppCompatActivity {
         newsArrayList = new ArrayList<>();
         recycler = new NewsRecycler(this, newsArrayList);
         newsView.setAdapter(recycler);
+
+//        newsView.onItemClickListener(new AdapterView.OnItemClickListener(){
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView)
+//        })
 
         getNewsList();
 
