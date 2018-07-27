@@ -1,189 +1,168 @@
 package com.robynandcory.goodnewseveryone;
 
-public class QueryUtils {
-    public static final String tempJSON = "{\n" +
-            "  \"response\": {\n" +
-            "    \"status\": \"ok\",\n" +
-            "    \"userTier\": \"developer\",\n" +
-            "    \"total\": 16,\n" +
-            "    \"startIndex\": 1,\n" +
-            "    \"pageSize\": 10,\n" +
-            "    \"currentPage\": 1,\n" +
-            "    \"pages\": 2,\n" +
-            "    \"orderBy\": \"newest\",\n" +
-            "    \"results\": [\n" +
-            "      {\n" +
-            "        \"id\": \"football/2018/jul/25/newcastle-close-signing-switzerland-defender-fabian-schar\",\n" +
-            "        \"type\": \"article\",\n" +
-            "        \"sectionId\": \"football\",\n" +
-            "        \"sectionName\": \"Football\",\n" +
-            "        \"webPublicationDate\": \"2018-07-25T16:52:55Z\",\n" +
-            "        \"webTitle\": \"Newcastle close in on £3m signing of Switzerland defender Fabian Schar\",\n" +
-            "        \"webUrl\": \"https://www.theguardian.com/football/2018/jul/25/newcastle-close-signing-switzerland-defender-fabian-schar\",\n" +
-            "        \"apiUrl\": \"https://content.guardianapis.com/football/2018/jul/25/newcastle-close-signing-switzerland-defender-fabian-schar\",\n" +
-            "        \"fields\": {\n" +
-            "          \"byline\": \"Louise Taylor\",\n" +
-            "          \"thumbnail\": \"https://media.guim.co.uk/8e004c257a6e25a549d2b284279ddf94bee98ca7/162_0_2510_1506/500.jpg\"\n" +
-            "        },\n" +
-            "        \"isHosted\": false,\n" +
-            "        \"pillarId\": \"pillar/sport\",\n" +
-            "        \"pillarName\": \"Sport\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"id\": \"football/2018/jul/25/the-fiver-malcom-barcelona-roma\",\n" +
-            "        \"type\": \"article\",\n" +
-            "        \"sectionId\": \"football\",\n" +
-            "        \"sectionName\": \"Football\",\n" +
-            "        \"webPublicationDate\": \"2018-07-25T15:02:07Z\",\n" +
-            "        \"webTitle\": \"The Fiver | Never fancied him anyway\",\n" +
-            "        \"webUrl\": \"https://www.theguardian.com/football/2018/jul/25/the-fiver-malcom-barcelona-roma\",\n" +
-            "        \"apiUrl\": \"https://content.guardianapis.com/football/2018/jul/25/the-fiver-malcom-barcelona-roma\",\n" +
-            "        \"fields\": {\n" +
-            "          \"byline\": \"Nick Miller\",\n" +
-            "          \"thumbnail\": \"https://media.guim.co.uk/f5de65af36b893b45d12c223d4a213ada2efcd44/529_349_4967_2980/500.jpg\"\n" +
-            "        },\n" +
-            "        \"isHosted\": false,\n" +
-            "        \"pillarId\": \"pillar/sport\",\n" +
-            "        \"pillarName\": \"Sport\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"id\": \"football/2018/jul/25/paul-madeley-obituary\",\n" +
-            "        \"type\": \"article\",\n" +
-            "        \"sectionId\": \"football\",\n" +
-            "        \"sectionName\": \"Football\",\n" +
-            "        \"webPublicationDate\": \"2018-07-25T11:23:51Z\",\n" +
-            "        \"webTitle\": \"Paul Madeley obituary\",\n" +
-            "        \"webUrl\": \"https://www.theguardian.com/football/2018/jul/25/paul-madeley-obituary\",\n" +
-            "        \"apiUrl\": \"https://content.guardianapis.com/football/2018/jul/25/paul-madeley-obituary\",\n" +
-            "        \"fields\": {\n" +
-            "          \"byline\": \"Peter Mason\",\n" +
-            "          \"thumbnail\": \"https://media.guim.co.uk/6e98b88db53c117cff6095f18d13e09c10c54db8/0_175_2048_1229/500.jpg\"\n" +
-            "        },\n" +
-            "        \"isHosted\": false,\n" +
-            "        \"pillarId\": \"pillar/sport\",\n" +
-            "        \"pillarName\": \"Sport\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"id\": \"football/2018/jul/25/which-football-club-has-made-the-biggest-profit-on-a-player-in-their-30s\",\n" +
-            "        \"type\": \"article\",\n" +
-            "        \"sectionId\": \"football\",\n" +
-            "        \"sectionName\": \"Football\",\n" +
-            "        \"webPublicationDate\": \"2018-07-25T09:07:49Z\",\n" +
-            "        \"webTitle\": \"Which football club has made the biggest profit on a player in their 30s? | The Knowledge\",\n" +
-            "        \"webUrl\": \"https://www.theguardian.com/football/2018/jul/25/which-football-club-has-made-the-biggest-profit-on-a-player-in-their-30s\",\n" +
-            "        \"apiUrl\": \"https://content.guardianapis.com/football/2018/jul/25/which-football-club-has-made-the-biggest-profit-on-a-player-in-their-30s\",\n" +
-            "        \"fields\": {\n" +
-            "          \"byline\": \"Guardian sport\",\n" +
-            "          \"thumbnail\": \"https://media.guim.co.uk/7a494279a419ba9de086698ca7f1116c7489032c/0_22_1676_1006/500.jpg\"\n" +
-            "        },\n" +
-            "        \"isHosted\": false,\n" +
-            "        \"pillarId\": \"pillar/sport\",\n" +
-            "        \"pillarName\": \"Sport\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"id\": \"football/2018/jul/25/football-transfer-rumours-inter-lionel-messi-hugo-lloris-real-madrid\",\n" +
-            "        \"type\": \"article\",\n" +
-            "        \"sectionId\": \"football\",\n" +
-            "        \"sectionName\": \"Football\",\n" +
-            "        \"webPublicationDate\": \"2018-07-25T07:13:25Z\",\n" +
-            "        \"webTitle\": \"Football transfer rumours: are Inter really eyeing a bid for Lionel Messi?\",\n" +
-            "        \"webUrl\": \"https://www.theguardian.com/football/2018/jul/25/football-transfer-rumours-inter-lionel-messi-hugo-lloris-real-madrid\",\n" +
-            "        \"apiUrl\": \"https://content.guardianapis.com/football/2018/jul/25/football-transfer-rumours-inter-lionel-messi-hugo-lloris-real-madrid\",\n" +
-            "        \"fields\": {\n" +
-            "          \"byline\": \"Niall McVeigh\",\n" +
-            "          \"thumbnail\": \"https://media.guim.co.uk/1cdf227101b332f1949d41927385142436a05629/0_275_3200_1919/500.jpg\"\n" +
-            "        },\n" +
-            "        \"isHosted\": false,\n" +
-            "        \"pillarId\": \"pillar/sport\",\n" +
-            "        \"pillarName\": \"Sport\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"id\": \"football/2018/jul/24/west-ham-manuel-pellegrini-promise-full-responsibility\",\n" +
-            "        \"type\": \"article\",\n" +
-            "        \"sectionId\": \"football\",\n" +
-            "        \"sectionName\": \"Football\",\n" +
-            "        \"webPublicationDate\": \"2018-07-24T21:30:53Z\",\n" +
-            "        \"webTitle\": \"West Ham’s Manuel Pellegrini says promise of full responsibility was key\",\n" +
-            "        \"webUrl\": \"https://www.theguardian.com/football/2018/jul/24/west-ham-manuel-pellegrini-promise-full-responsibility\",\n" +
-            "        \"apiUrl\": \"https://content.guardianapis.com/football/2018/jul/24/west-ham-manuel-pellegrini-promise-full-responsibility\",\n" +
-            "        \"fields\": {\n" +
-            "          \"byline\": \"Jacob Steinberg\",\n" +
-            "          \"thumbnail\": \"https://media.guim.co.uk/6c119774ac0cd7467b954cbe1ec48f6e5c9fe778/107_0_4428_2658/500.jpg\"\n" +
-            "        },\n" +
-            "        \"isHosted\": false,\n" +
-            "        \"pillarId\": \"pillar/sport\",\n" +
-            "        \"pillarName\": \"Sport\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"id\": \"football/2018/jul/24/adam-lallana-england-world-cup-squad-right-call-liverpool\",\n" +
-            "        \"type\": \"article\",\n" +
-            "        \"sectionId\": \"football\",\n" +
-            "        \"sectionName\": \"Football\",\n" +
-            "        \"webPublicationDate\": \"2018-07-24T21:30:53Z\",\n" +
-            "        \"webTitle\": \"Gareth Southgate was right not to take me to World Cup, admits Adam Lallana\",\n" +
-            "        \"webUrl\": \"https://www.theguardian.com/football/2018/jul/24/adam-lallana-england-world-cup-squad-right-call-liverpool\",\n" +
-            "        \"apiUrl\": \"https://content.guardianapis.com/football/2018/jul/24/adam-lallana-england-world-cup-squad-right-call-liverpool\",\n" +
-            "        \"fields\": {\n" +
-            "          \"byline\": \"Andy Hunter in New York\",\n" +
-            "          \"thumbnail\": \"https://media.guim.co.uk/ee0c7117cc10fb48d5a5e1b1426c7f5539fdd85f/0_128_2618_1571/500.jpg\"\n" +
-            "        },\n" +
-            "        \"isHosted\": false,\n" +
-            "        \"pillarId\": \"pillar/sport\",\n" +
-            "        \"pillarName\": \"Sport\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"id\": \"football/2018/jul/24/richarlison-joins-everton-repay-marco-silva-faith\",\n" +
-            "        \"type\": \"article\",\n" +
-            "        \"sectionId\": \"football\",\n" +
-            "        \"sectionName\": \"Football\",\n" +
-            "        \"webPublicationDate\": \"2018-07-24T20:16:31Z\",\n" +
-            "        \"webTitle\": \"Richarlison has all attributes to repay Marco Silva’s faith again at Everton\",\n" +
-            "        \"webUrl\": \"https://www.theguardian.com/football/2018/jul/24/richarlison-joins-everton-repay-marco-silva-faith\",\n" +
-            "        \"apiUrl\": \"https://content.guardianapis.com/football/2018/jul/24/richarlison-joins-everton-repay-marco-silva-faith\",\n" +
-            "        \"fields\": {\n" +
-            "          \"byline\": \"Simon Burnton\",\n" +
-            "          \"thumbnail\": \"https://media.guim.co.uk/ee6a78b13289d141e5ec581f6aa9d4c58d6d8b89/0_130_4500_2700/500.jpg\"\n" +
-            "        },\n" +
-            "        \"isHosted\": false,\n" +
-            "        \"pillarId\": \"pillar/sport\",\n" +
-            "        \"pillarName\": \"Sport\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"id\": \"football/2018/jul/24/manchester-city-not-break-more-records-pep-guardiola\",\n" +
-            "        \"type\": \"article\",\n" +
-            "        \"sectionId\": \"football\",\n" +
-            "        \"sectionName\": \"Football\",\n" +
-            "        \"webPublicationDate\": \"2018-07-24T18:47:52Z\",\n" +
-            "        \"webTitle\": \"Manchester City will not break any more records, says Pep Guardiola\",\n" +
-            "        \"webUrl\": \"https://www.theguardian.com/football/2018/jul/24/manchester-city-not-break-more-records-pep-guardiola\",\n" +
-            "        \"apiUrl\": \"https://content.guardianapis.com/football/2018/jul/24/manchester-city-not-break-more-records-pep-guardiola\",\n" +
-            "        \"fields\": {\n" +
-            "          \"byline\": \"Andy Hunter in New York\",\n" +
-            "          \"thumbnail\": \"https://media.guim.co.uk/b949e5cb8e376749538b3eaf34a39090dc0cfb15/0_46_3804_2283/500.jpg\"\n" +
-            "        },\n" +
-            "        \"isHosted\": false,\n" +
-            "        \"pillarId\": \"pillar/sport\",\n" +
-            "        \"pillarName\": \"Sport\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"id\": \"football/2018/jul/24/steve-bruce-aston-villa-thierry-henry-owners\",\n" +
-            "        \"type\": \"article\",\n" +
-            "        \"sectionId\": \"football\",\n" +
-            "        \"sectionName\": \"Football\",\n" +
-            "        \"webPublicationDate\": \"2018-07-24T17:30:26Z\",\n" +
-            "        \"webTitle\": \"Steve Bruce to meet Aston Villa owners as Thierry Henry speculation grows\",\n" +
-            "        \"webUrl\": \"https://www.theguardian.com/football/2018/jul/24/steve-bruce-aston-villa-thierry-henry-owners\",\n" +
-            "        \"apiUrl\": \"https://content.guardianapis.com/football/2018/jul/24/steve-bruce-aston-villa-thierry-henry-owners\",\n" +
-            "        \"fields\": {\n" +
-            "          \"byline\": \"Louise Taylor\",\n" +
-            "          \"thumbnail\": \"https://media.guim.co.uk/8f3bfe27cfdb9c50413c8097ae2469e7335d55d7/646_20_3474_2084/500.jpg\"\n" +
-            "        },\n" +
-            "        \"isHosted\": false,\n" +
-            "        \"pillarId\": \"pillar/sport\",\n" +
-            "        \"pillarName\": \"Sport\"\n" +
-            "      }\n" +
-            "    ]\n" +
-            "  }\n" +
-            "}";
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.text.TextUtils;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+
+public final class QueryUtils {
+    private static final String LOG_TAG = NewsListActivity.class.getName();
+
+    private QueryUtils() {
+        //query utils should not be constructed elsewhere
+    }
+
+    /**
+     * convert URLstring into URL object
+     *
+     * @return URL object
+     */
+
+    public static List<NewsItem> getNewsData(String requestUrl) {
+        URL url = getURL(requestUrl);
+
+        String jsonResponse = null;
+        try {
+            jsonResponse = startHttpRequest(url);
+        } catch (IOException ioError) {
+            Log.e(LOG_TAG, "Trouble with http request: ", ioError);
+        }
+
+        //get JSON response and create a list of {@link NewsItem}s
+        List<NewsItem> newsItems = extractFeatureFromJson(jsonResponse);
+        return newsItems;
+    }
+
+    private static URL getURL(String stringURL) {
+        URL url = null;
+        try {
+            url = new URL(stringURL);
+        } catch (MalformedURLException urlError) {
+            Log.e(LOG_TAG, "The url had an error: ", urlError);
+        }
+        return url;
+
+    }
+
+    private static String startHttpRequest(URL url) throws IOException {
+        //Returns empty response early if URL is null.
+        String jsonResponse = "";
+        if (url == null) {
+            return jsonResponse;
+        }
+
+        HttpURLConnection httpURLConnection = null;
+        InputStream inputStream = null;
+        try {
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setReadTimeout(10000);
+            httpURLConnection.setConnectTimeout(15000);
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.connect();
+
+            //if the connection works, parse it, if not, error response
+            if (httpURLConnection.getResponseCode() == 200) {
+                inputStream = httpURLConnection.getInputStream();
+                jsonResponse = readFromStream(inputStream);
+                Log.e(LOG_TAG, "The url had an error: " + httpURLConnection.getResponseCode());
+            } else {
+                Log.e(LOG_TAG, "The url had an error: " + httpURLConnection.getResponseCode());
+            }
+        } catch (IOException ioError) {
+            Log.e(LOG_TAG, "The io when getting JSON results had an error: ", ioError);
+        } finally {
+            //close the URL connection and input stream if they were successful.
+            if (httpURLConnection != null) httpURLConnection.disconnect();
+            if (inputStream != null) inputStream.close();
+        }
+        return jsonResponse;
+    }
+
+    /**
+     * Convert the inputStream into a String which is the JSON response ready for parsing
+     *
+     * @param inputStream
+     * @return the String output JSON from the server
+     * @throws IOException
+     */
+    private static String readFromStream(InputStream inputStream) throws IOException {
+        StringBuilder outputString = new StringBuilder();
+        if (inputStream != null) {
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String line = reader.readLine();
+            while (line != null) {
+                outputString.append(line);
+                line = reader.readLine();
+            }
+
+        }
+        return outputString.toString();
+    }
+
+    /**
+     * take a string from Guardian API, turn it into a JSONObject,
+     * parse it into the fields of a NewsItem and add it to an ArrayList
+     */
+    private static List<NewsItem> extractFeatureFromJson(String inputJSON) {
+        if (TextUtils.isEmpty((inputJSON))) {
+            return null;
+        }
+
+        List<NewsItem> newsArrayList = new ArrayList<>();
+
+        try {
+            Log.e(LOG_TAG, "Attempting JSON parsing");
+
+            JSONObject rootJSON = new JSONObject(inputJSON);
+            JSONObject newsJSON = rootJSON.getJSONObject("response");
+            JSONArray newsArray = newsJSON.getJSONArray("results");
+
+            //loop through the JSON response and parse out each story
+            for (int i = 0; i < newsArray.length(); i++) {
+                JSONObject thisNewsItem = newsArray.getJSONObject(i);
+                String storyTitle = thisNewsItem.getString("webTitle");
+                String storyURL = thisNewsItem.getString("webUrl");
+                String storyDate = thisNewsItem.getString("webPublicationDate");
+
+                //get additional fields that may not be in every story.
+                JSONObject newsFields = thisNewsItem.getJSONObject("fields");
+                String storyAuthor = newsFields.optString("byline");
+                String storyImage = newsFields.optString("thumbnail");
+
+                newsArrayList.add(new NewsItem(storyTitle, storyAuthor, storyDate, storyURL, getStoryImage(storyImage)));
+            }
+        } catch (JSONException error) {
+            Log.e(LOG_TAG, "there was a JSON parsing error", error);
+        }
+        return newsArrayList;
+    }
+
+    private static Bitmap getStoryImage(String url) {
+        Bitmap storyImage = null;
+        try {
+            InputStream inputStream = new URL(url).openStream();
+            storyImage = BitmapFactory.decodeStream(inputStream);
+        } catch (Exception bmpError) {
+            Log.e(LOG_TAG, "This is the URL that failed: " + url, bmpError);
+        }
+        return storyImage;
+
+    }
 
 }

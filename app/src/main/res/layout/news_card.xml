@@ -1,74 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="355dp">
-
-<android.support.constraint.ConstraintLayout
-    android:id="@+id/card_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/cardImageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"    />
-        <!--tools:src="@drawable/backgroundpdx" />-->
-
+    android:layout_height="148dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:elevation="16dp">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/cardImageView"
+            android:layout_width="132dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/cardAuthorView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/cardHeadlineView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/oziltest" />
 
         <TextView
             android:id="@+id/cardHeadlineView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="16dp"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@id/cardAuthorView"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="News Headline" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="start"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/cardAuthorView"
-            app:layout_constraintLeft_toRightOf="@id/cardHeadlineView"
+            app:layout_constraintLeft_toRightOf="@id/cardImageView"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Bob Ross" />
+            tools:text="This is the News Headline that talks about something that happened in Football." />
+
         <TextView
             android:id="@+id/cardAuthorView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="start"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@id/cardImageView"
             app:layout_constraintTop_toBottomOf="@id/cardHeadlineView"
+            app:layout_constraintBottom_toTopOf="@id/cardSectionView"
             tools:text="Bob Ross." />
 
+        <TextView
+            android:id="@+id/cardDateView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="start"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/cardSectionView"
+            app:layout_constraintLeft_toRightOf="@id/cardImageView"
+            app:layout_constraintTop_toBottomOf="@id/cardAuthorView"
+            tools:text="January 7, 2018" />
+
+        <TextView
+            android:id="@+id/cardSectionView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="start"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/cardImageView"
+            app:layout_constraintTop_toBottomOf="@id/cardDateView"
+            tools:text="Football" />
+
+
     </android.support.constraint.ConstraintLayout>
-
-
-
-</android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
