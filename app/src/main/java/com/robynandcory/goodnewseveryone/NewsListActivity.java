@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Today in Football is a news app that loads the latest Football stories from the Guardian API
+ * Today in Football is a news app for Udacity ABND
+ * that loads the latest Football stories from the Guardian API.
  *
  * With thanks to references:
  * For JSON parsing and networking reference:
