@@ -6,19 +6,17 @@ public class NewsItem {
     private String mStoryTitle;
     private String mStoryAuthor;
     private String mStoryDate;
+    private String mStorySection;
     private String mStoryURL;
     // Thumbnail stored as BMP from Guardian API
     private Bitmap mImageResource;
 
-    public NewsItem(String storyTitle, String storyAuthor, String storyDate, String storyURL, Bitmap imageResource){
-//        if(storyAuthor == null){
-//        mStoryAuthor = "Author Unknown";}
-//        else if (imageResource == null){
-//        mImageResource = R.drawable.oziltest;}
+    public NewsItem(String storyTitle, String storyAuthor, String storyDate, String storySection, String storyURL, Bitmap imageResource){
 
         mStoryTitle = storyTitle;
         mStoryAuthor = storyAuthor;
         mStoryDate = storyDate;
+        mStorySection = storySection;
         mStoryURL = storyURL;
         mImageResource = imageResource;
     }
@@ -31,6 +29,9 @@ public class NewsItem {
 
     //Returns the story Date
     public String getStoryDate() {return mStoryDate; }
+
+    //Returns the story Date
+    public String getStorySection() {return mStorySection; }
 
     //Returns the story URL
     public String getStoryURL() {return mStoryURL; }

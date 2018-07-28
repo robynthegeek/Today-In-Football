@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Today In Football</string>
+    <string name="check_connection">Please check your connection and retry.</string>
+    <string name="getting_your_daily_football_news">Getting Your Daily Football News</string>
+    <string name="no_football_news_was_found_ntry_starting_again_in_5_minutes_for_fresh_football_news">No Football news was found.  Try starting again in 5 minutes for fresh Football news.</string>
+    <string name="unknown_writer">Unknown Writer</string>
+    <string name="install_browser">Please install a browser</string>
 </resources>

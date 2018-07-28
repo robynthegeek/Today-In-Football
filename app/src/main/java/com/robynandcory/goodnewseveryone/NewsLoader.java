@@ -12,8 +12,9 @@ public class NewsLoader extends AsyncTaskLoader<List<NewsItem>> {
 
     /**
      * Contstructor for a new {@link NewsLoader}.
+     *
      * @param context of the activity
-     * @param url String to load data from
+     * @param url     String to load data from
      */
     public NewsLoader(Context context, String url) {
         super(context);
@@ -24,6 +25,7 @@ public class NewsLoader extends AsyncTaskLoader<List<NewsItem>> {
     protected void onStartLoading() {
         forceLoad();
     }
+
     @Override
     public List<NewsItem> loadInBackground() {
         if (mUrl == null) {

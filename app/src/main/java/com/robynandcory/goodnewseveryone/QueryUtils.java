@@ -21,10 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class QueryUtils {
+    //Log tag for catching error statements
     private static final String LOG_TAG = NewsListActivity.class.getName();
 
     private QueryUtils() {
-        //query utils should not be constructed elsewhere
+        //empty constructor because query utils should not be constructed elsewhere
     }
 
     /**
@@ -32,7 +33,6 @@ public final class QueryUtils {
      *
      * @return URL object
      */
-
     public static List<NewsItem> getNewsData(String requestUrl) {
         URL url = getURL(requestUrl);
 
@@ -42,12 +42,16 @@ public final class QueryUtils {
         } catch (IOException ioError) {
             Log.e(LOG_TAG, "Trouble with http request: ", ioError);
         }
-
         //get JSON response and create a list of {@link NewsItem}s
         List<NewsItem> newsItems = extractFeatureFromJson(jsonResponse);
         return newsItems;
     }
 
+    /**
+     * Create URL object from String stored in NewsListActivity
+     * @param stringURL
+     * @return URL object
+     */
     private static URL getURL(String stringURL) {
         URL url = null;
         try {
@@ -56,9 +60,14 @@ public final class QueryUtils {
             Log.e(LOG_TAG, "The url had an error: ", urlError);
         }
         return url;
-
     }
 
+    /**
+     * open Http connection to server, get the response and begin parsing.
+     * @param url String
+     * @return JSON String from the server
+     * @throws IOException
+     */
     private static String startHttpRequest(URL url) throws IOException {
         //Returns empty response early if URL is null.
         String jsonResponse = "";
@@ -79,12 +88,11 @@ public final class QueryUtils {
             if (httpURLConnection.getResponseCode() == 200) {
                 inputStream = httpURLConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-                Log.e(LOG_TAG, "The url had an error: " + httpURLConnection.getResponseCode());
             } else {
                 Log.e(LOG_TAG, "The url had an error: " + httpURLConnection.getResponseCode());
             }
         } catch (IOException ioError) {
-            Log.e(LOG_TAG, "The io when getting JSON results had an error: ", ioError);
+            Log.e(LOG_TAG, "Getting JSON results had an error: ", ioError);
         } finally {
             //close the URL connection and input stream if they were successful.
             if (httpURLConnection != null) httpURLConnection.disconnect();
@@ -110,7 +118,6 @@ public final class QueryUtils {
                 outputString.append(line);
                 line = reader.readLine();
             }
-
         }
         return outputString.toString();
     }
@@ -127,8 +134,6 @@ public final class QueryUtils {
         List<NewsItem> newsArrayList = new ArrayList<>();
 
         try {
-            Log.e(LOG_TAG, "Attempting JSON parsing");
-
             JSONObject rootJSON = new JSONObject(inputJSON);
             JSONObject newsJSON = rootJSON.getJSONObject("response");
             JSONArray newsArray = newsJSON.getJSONArray("results");
@@ -139,13 +144,15 @@ public final class QueryUtils {
                 String storyTitle = thisNewsItem.getString("webTitle");
                 String storyURL = thisNewsItem.getString("webUrl");
                 String storyDate = thisNewsItem.getString("webPublicationDate");
+                String storySection = thisNewsItem.getString("sectionName");
 
                 //get additional fields that may not be in every story.
                 JSONObject newsFields = thisNewsItem.getJSONObject("fields");
                 String storyAuthor = newsFields.optString("byline");
                 String storyImage = newsFields.optString("thumbnail");
 
-                newsArrayList.add(new NewsItem(storyTitle, storyAuthor, storyDate, storyURL, getStoryImage(storyImage)));
+                //add results to a list of NewsItems
+                newsArrayList.add(new NewsItem(storyTitle, storyAuthor, storyDate, storySection, storyURL, getStoryImage(storyImage)));
             }
         } catch (JSONException error) {
             Log.e(LOG_TAG, "there was a JSON parsing error", error);
@@ -153,16 +160,19 @@ public final class QueryUtils {
         return newsArrayList;
     }
 
+    /**
+     * Decode the bitmap from URL
+     * @param url parsed from JSON
+     * @return bmp image to store & display
+     */
     private static Bitmap getStoryImage(String url) {
         Bitmap storyImage = null;
         try {
             InputStream inputStream = new URL(url).openStream();
             storyImage = BitmapFactory.decodeStream(inputStream);
         } catch (Exception bmpError) {
-            Log.e(LOG_TAG, "This is the URL that failed: " + url, bmpError);
+            Log.e(LOG_TAG, "This is the .bmp URL that failed: " + url, bmpError);
         }
         return storyImage;
-
     }
-
 }
