@@ -43,8 +43,7 @@ public final class QueryUtils {
             Log.e(LOG_TAG, "Trouble with http request: ", ioError);
         }
         //get JSON response and create a list of {@link NewsItem}s
-        List<NewsItem> newsItems = extractFeatureFromJson(jsonResponse);
-        return newsItems;
+        return extractFeatureFromJson(jsonResponse);
     }
 
     /**
@@ -69,6 +68,10 @@ public final class QueryUtils {
      * @throws IOException
      */
     private static String startHttpRequest(URL url) throws IOException {
+
+        final int readTimeout = 10000;
+        final int connectTimeout = 15000;
+
         //Returns empty response early if URL is null.
         String jsonResponse = "";
         if (url == null) {
@@ -79,8 +82,8 @@ public final class QueryUtils {
         InputStream inputStream = null;
         try {
             httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setReadTimeout(10000);
-            httpURLConnection.setConnectTimeout(15000);
+            httpURLConnection.setReadTimeout(readTimeout);
+            httpURLConnection.setConnectTimeout(connectTimeout);
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.connect();
 
