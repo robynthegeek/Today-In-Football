@@ -5,4 +5,6 @@
     <string name="no_football_news_was_found_ntry_starting_again_in_5_minutes_for_fresh_football_news">No Football news was found.  Try starting again in 5 minutes for fresh Football news.</string>
     <string name="unknown_writer">Unknown Writer</string>
     <string name="install_browser">Please install a browser</string>
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">News Settings</string>
 </resources>

@@ -3,16 +3,21 @@ package com.robynandcory.goodnewseveryone;
 import android.app.LoaderManager;
 import android.content.Context;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.content.Loader;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,9 +49,11 @@ public class NewsListActivity extends AppCompatActivity
     //Loader ID
     private static final int NEWS_LOADER_ID = 0;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView newsView;
     private NewsRecycler recycler;
     private TextView noResultsTextView;
+
 
     private ArrayList<NewsItem> newsArrayList;
 
@@ -59,12 +66,28 @@ public class NewsListActivity extends AppCompatActivity
         newsView = findViewById(R.id.news_recycler);
         newsView.setLayoutManager(new LinearLayoutManager(this));
 
+        //find the SwipreRefreshLayout
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_recycler);
+        swipeRefreshLayout.setRefreshing(true);
+
         noResultsTextView = findViewById(R.id.no_results);
 
         newsArrayList = new ArrayList<>();
         recycler = new NewsRecycler(this, newsArrayList);
         newsView.setAdapter(recycler);
 
+        //Start Swipe Refresh
+        startSwipeRefresh();
+
+        //Run loader setup
+        setupLoader();
+
+    }
+
+    /**
+     * Checks for connectivity and runs loader if OK, if not, shows error Toast.
+     */
+    public void setupLoader() {
         //Check internet connectivity, get details on data network
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -76,6 +99,7 @@ public class NewsListActivity extends AppCompatActivity
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
             //if no network is found, show a toast asking the user to check the internet connection
         } else {
+            swipeRefreshLayout.setRefreshing(false);
             View loadIndicator = findViewById(R.id.loading);
             loadIndicator.setVisibility(View.GONE);
             View loadingText = findViewById(R.id.loading_text);
@@ -92,6 +116,9 @@ public class NewsListActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<NewsItem>> loader, List<NewsItem> newsItems) {
+
+        swipeRefreshLayout.setRefreshing(false);
+
         View loadIndicator = findViewById(R.id.loading);
         loadIndicator.setVisibility(View.GONE);
         View loadingText = findViewById(R.id.loading_text);
@@ -104,6 +131,7 @@ public class NewsListActivity extends AppCompatActivity
         //Check if the news list has been populated, if so, display the list, if not, show a helpful message.
         if (newsItems != null && !newsItems.isEmpty()) {
             noResultsTextView.setVisibility(View.GONE);
+            newsArrayList.clear();
             newsArrayList.addAll(newsItems);
             recycler.notifyDataSetChanged();
         } else {
@@ -116,5 +144,34 @@ public class NewsListActivity extends AppCompatActivity
     public void onLoaderReset(Loader<List<NewsItem>> loader) {
         newsArrayList.clear();
         recycler.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void startSwipeRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.e("main acivity", "refresh swipe");
+                swipeRefreshLayout.setRefreshing(true);
+                newsArrayList.clear();
+                //LoaderManager.
+            }
+        });
     }
 }

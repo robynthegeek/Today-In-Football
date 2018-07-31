@@ -160,7 +160,10 @@ public final class QueryUtils {
         } catch (JSONException error) {
             Log.e(LOG_TAG, "there was a JSON parsing error", error);
         }
+        Log.e("NewsLoader", "is this printed twice?");
+
         return newsArrayList;
+
     }
 
     /**
