@@ -1,7 +1,7 @@
 package com.robynandcory.goodnewseveryone;
 
 import android.content.Context;
-import android.content.AsyncTaskLoader;
+import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 
@@ -9,6 +9,7 @@ import java.util.List;
 
 public class NewsLoader extends AsyncTaskLoader<List<NewsItem>> {
 
+    //URL for querying Guardian API
     private String mUrl;
 
     /**

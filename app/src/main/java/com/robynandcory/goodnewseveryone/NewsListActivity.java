@@ -1,21 +1,20 @@
 package com.robynandcory.goodnewseveryone;
 
-import android.app.LoaderManager;
 import android.content.Context;
 
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
-import android.content.Loader;
-import android.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +23,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 /**
  * Today in Football is a news app for Udacity ABND
@@ -40,7 +41,7 @@ import java.util.List;
  */
 
 public class NewsListActivity extends AppCompatActivity
-        implements LoaderCallbacks<List<NewsItem>> {
+        implements LoaderManager.LoaderCallbacks<List<NewsItem>> {
 
     //URL for data from the Guardian API
     private static final String stringURL =
@@ -53,6 +54,7 @@ public class NewsListActivity extends AppCompatActivity
     private RecyclerView newsView;
     private NewsRecycler recycler;
     private TextView noResultsTextView;
+    private Boolean isLoading = false;
 
 
     private ArrayList<NewsItem> newsArrayList;
@@ -88,24 +90,36 @@ public class NewsListActivity extends AppCompatActivity
      * Checks for connectivity and runs loader if OK, if not, shows error Toast.
      */
     public void setupLoader() {
+
+        //if there's a successful network connection, get API data using Loader
+        if (hasInternet()) {
+            getSupportLoaderManager().initLoader(NEWS_LOADER_ID, null, this);
+            isLoading = true;
+            //if no network is found, show a toast asking the user to check the internet connection
+        } else {
+            noNetworkError();
+        }
+    }
+
+    public boolean hasInternet() {
         //Check internet connectivity, get details on data network
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        //if there's a successful network connection, get API data using Loader
-        if (networkInfo != null && networkInfo.isConnected()) {
-            LoaderManager loaderManager = getLoaderManager();
-            loaderManager.initLoader(NEWS_LOADER_ID, null, this);
-            //if no network is found, show a toast asking the user to check the internet connection
+        if (networkInfo != null && networkInfo.isConnected()){
+            return true;
         } else {
-            swipeRefreshLayout.setRefreshing(false);
-            View loadIndicator = findViewById(R.id.loading);
-            loadIndicator.setVisibility(View.GONE);
-            View loadingText = findViewById(R.id.loading_text);
-            loadingText.setVisibility(View.GONE);
-            Toast.makeText(NewsListActivity.this, (getResources().getString(R.string.check_connection)), Toast.LENGTH_LONG).show();
+            return false;
         }
+    }
+
+    public void noNetworkError() {
+        swipeRefreshLayout.setRefreshing(false);
+        View loadIndicator = findViewById(R.id.loading);
+        loadIndicator.setVisibility(View.GONE);
+        View loadingText = findViewById(R.id.loading_text);
+        loadingText.setVisibility(View.GONE);
+        Toast.makeText(NewsListActivity.this, (getResources().getString(R.string.check_connection)), Toast.LENGTH_LONG).show();
     }
 
     @NonNull
@@ -123,6 +137,7 @@ public class NewsListActivity extends AppCompatActivity
         loadIndicator.setVisibility(View.GONE);
         View loadingText = findViewById(R.id.loading_text);
         loadingText.setVisibility(View.GONE);
+        isLoading = false;
 
         //Comment in the line below to test the condition where the newsItems list is empty
         //I have left it in solely for grading purposes:
@@ -163,14 +178,26 @@ public class NewsListActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private void restartLoader() {
+        if (hasInternet()) {
+            swipeRefreshLayout.setRefreshing(true);
+            isLoading = true;
+            getSupportLoaderManager().restartLoader(NEWS_LOADER_ID, null, this);
+        }else {
+            noNetworkError();
+        }
+
+    }
+
     private void startSwipeRefresh() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.e("main acivity", "refresh swipe");
-                swipeRefreshLayout.setRefreshing(true);
-                newsArrayList.clear();
-                //LoaderManager.
+               if(isLoading){restartLoader();}
+               else if(!isLoading){
+                   Toast.makeText(NewsListActivity.this, (getResources().getString(R.string.please_wait)), Toast.LENGTH_LONG).show();
+
+               }
             }
         });
     }
