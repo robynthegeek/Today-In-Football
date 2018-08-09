@@ -1,23 +1,20 @@
 package com.robynandcory.goodnewseveryone;
 
 import android.content.Context;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,14 +56,11 @@ public class NewsListActivity extends AppCompatActivity
 
     //default value for setting limiting stories to a single day
     private Boolean defaultLimitDate = false;
-
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView newsView;
     private NewsRecycler recycler;
     private TextView noResultsTextView;
     private Boolean isLoading = false;
-
-
     private ArrayList<NewsItem> newsArrayList;
 
     @Override
@@ -135,11 +129,9 @@ public class NewsListActivity extends AppCompatActivity
     @NonNull
     @Override
     public Loader<List<NewsItem>> onCreateLoader(int i, Bundle bundle) {
-//            "https://content.guardianapis.com/search?show-fields=thumbnail%2Cbyline&section=football&page-size=25&api-key=91b606b8-a998-4f76-9e92-5faf5f08fdb5"
-//            "https://content.guardianapis.com/search?show-fields=thumbnail%252Cbyline&section=football&page-size=10&api-key=91b606b8-a998-4f76-9e92-5faf5f08fdb5";
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        String minStories = sharedPreferences.getString(
+        //get key and defaults for the settings panel
+        String maxStories = sharedPreferences.getString(
                 getString(R.string.settings_number_of_stories_key),
                 getString(R.string.settings_number_of_stories_default));
         Boolean limitToToday = sharedPreferences.getBoolean(
@@ -150,7 +142,8 @@ public class NewsListActivity extends AppCompatActivity
         Uri uriStart = Uri.parse(stringURL);
         Uri.Builder uriBuilder = uriStart.buildUpon();
         uriBuilder.appendQueryParameter("section", "football");
-        uriBuilder.appendQueryParameter("page-size", minStories);
+        //takes user preference to set the maximum number of stories returned
+        uriBuilder.appendQueryParameter("page-size", maxStories);
         //If setting to limit to a single day is checked, set the to and from dates to today.
         if (limitToToday) {
             String todaysDate = getTodaysDate();
@@ -158,9 +151,6 @@ public class NewsListActivity extends AppCompatActivity
             uriBuilder.appendQueryParameter("to-date", todaysDate);
         }
         uriBuilder.appendQueryParameter("api-key", apiKey);
-
-        Log.e("mainactivity", "URL built was: " + uriBuilder.toString());
-
         return new NewsLoader(this, uriBuilder.toString());
     }
 
@@ -227,7 +217,6 @@ public class NewsListActivity extends AppCompatActivity
         } else {
             noNetworkError();
         }
-
     }
 
     private void startSwipeRefresh() {
@@ -238,7 +227,6 @@ public class NewsListActivity extends AppCompatActivity
                     restartLoader();
                 } else if (isLoading) {
                     Toast.makeText(NewsListActivity.this, (getResources().getString(R.string.please_wait)), Toast.LENGTH_LONG).show();
-
                 }
             }
         });

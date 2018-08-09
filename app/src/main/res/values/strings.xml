@@ -9,9 +9,13 @@
     <string name="settings_title">News Settings</string>
     <string name="please_wait">Please wait while your news loads.</string>
     <string name="settings_number_of_stories">Number of Stories</string>
+    <string name="settings_number_of_stories_dialog">Load between 1 and 50 stories</string>
     <string name="settings_number_of_stories_key" translatable="false">story_quantity</string>
     <string name="settings_number_of_stories_default" translatable="false">20</string>
+    <string name="settings_number_of_stories_summary">Select the number of stories</string>
+    <string name="settings_number_of_stories_input" translatable="false">numberDecimal</string>
     <string name="settings_date_of_stories">Story Date</string>
+    <string name="settings_date_of_stories_summary">Limit results to Today\'s Stories</string>
     <string name="settings_date_of_stories_key" translatable="false">story_date</string>
     <string name="settings_date_of_stories_default" translatable="false">false</string>
 </resources>
