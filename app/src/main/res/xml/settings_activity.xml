@@ -3,26 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.preference.PreferenceCategory android:title="Category 1">
+    <android.support.v7.preference.PreferenceCategory android:title="@string/settings_title">
 
         <android.support.v7.preference.SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:key="key1"
-            android:summary="Switch Summary"
-            android:title="Switch Preference" />
+            android:defaultValue="settings_date_of_stories_default"
+            android:key="@string/settings_date_of_stories_key"
+            android:summary="Limit results to Today's Stories?"
+            android:title="@string/settings_date_of_stories" />
 
         <android.support.v7.preference.EditTextPreference
-            android:defaultValue="Default value"
-            android:dialogMessage="Dialog Message"
-            android:key="key2"
-            android:summary="EditText Summary"
-            android:title="EditText Preference" />
-
-        <android.support.v7.preference.CheckBoxPreference
-            android:defaultValue="true"
-            android:key="key3"
-            android:summary="CheckBox Summary"
-            android:title="CheckBox Preference" />
+            android:defaultValue="@string/settings_number_of_stories_default"
+            android:dialogMessage="Load between 1 and 50 stories"
+            android:inputType="numberDecimal"
+            android:key="@string/settings_number_of_stories_key"
+            android:summary="Select the number of stories"
+            android:title="@string/settings_number_of_stories" />
 
     </android.support.v7.preference.PreferenceCategory>
 
